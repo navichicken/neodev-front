@@ -24,14 +24,14 @@ class Create extends Component {
 
 	componentDidMount(){
 		// Uso tipico (no olvides de comparar los props):https://cors-anywhere.herokuapp.com/
-	   axios.get('https://costoprogramas-back.herokuapp.com/programa-ciclos/'+this.props.tipo_grado)		
+	   axios.get('https://cors-anywhere.herokuapp.com/https://costoprogramas-back.herokuapp.com/programa-ciclos/'+this.props.tipo_grado)		
 			.then(response => {
 				this.setState({ programa_ciclos: response.data })			
 			})
 			.catch( error =>{ console.log(error) 
 			});
 
-	  	axios.get('https://costoprogramas-back.herokuapp.com/conceptos',{ crossdomain: true })
+	  	axios.get('https://cors-anywhere.herokuapp.com/https://costoprogramas-back.herokuapp.com/conceptos',{ crossdomain: true })
 				.then(response => {
 				//	console.log(response);
 		    let concepto_all = response.data|| [] ;

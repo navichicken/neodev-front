@@ -4,7 +4,7 @@ import * as Detalles from './components-registro-presupuesto/detalles';
 import Header from './components-registro-presupuesto/Header';
 import swal from 'sweetalert';
 import {browserHistory} from 'react-router-3';
-
+import CONFIG from '../Configuracion/Conf';
 
 class RegistroCostoPrograma extends Component {
 	constructor(){
@@ -180,7 +180,7 @@ class RegistroCostoPrograma extends Component {
 
 		let ciclo_delete =  e.currentTarget.getAttribute('ciclo');
 		let concepto_delete =  Number(e.currentTarget.getAttribute('concepto'));
-		let url ='https://cors-anywhere.herokuapp.com/https://costoprogramas-back.herokuapp.com/presupuesto-detalles?'
+		let url ='https://cors-anywhere.herokuapp.com/'+CONFIG+'/presupuesto-detalles?'
 								+'id-ciclo='+ciclo_delete
 								+'&id-concepto='+concepto_delete
 								+'&id-presupuesto='+this.state.form.id_programa_presupuesto;
@@ -227,7 +227,7 @@ class RegistroCostoPrograma extends Component {
 							body: JSON.stringify(this.state.form)
 						}
 						let response = await
-			fetch('https://cors-anywhere.herokuapp.com/https://costoprogramas-back.herokuapp.com/presupuestos',config)
+			fetch('https://cors-anywhere.herokuapp.com/'+CONFIG+'/presupuestos',config)
 						let json = await response.json()
 						console.log(json);
 					this.setState(prevState => ({
@@ -264,7 +264,7 @@ class RegistroCostoPrograma extends Component {
 						body: JSON.stringify(this.state.form)
 					}
 						let response = await
-		fetch('https://cors-anywhere.herokuapp.com/https://costoprogramas-back.herokuapp.com/presupuestos/'+
+		fetch('https://cors-anywhere.herokuapp.com/'+CONFIG+'/presupuestos/'+
 			this.state.form.id_programa_presupuesto+'/detalle',config)
 						let json = await response.json()
 						console.log(json);
@@ -296,7 +296,7 @@ class RegistroCostoPrograma extends Component {
 						body: JSON.stringify(this.state.form)
 					}
 						let response = await
-		fetch('https://cors-anywhere.herokuapp.com/https://costoprogramas-back.herokuapp.com/presupuesto-detalles?id-ciclo='+
+		fetch('https://cors-anywhere.herokuapp.com/'+CONFIG+'/presupuesto-detalles?id-ciclo='+
 						this.state.form.id_programa_ciclo+'&id-concepto='+
 						this.state.form.id_concepto+'&id-presupuesto='+this.state.form.id_programa_presupuesto,config)
 						let json = await response.json()
@@ -328,7 +328,7 @@ class RegistroCostoPrograma extends Component {
 						body: JSON.stringify(this.state.form)
 					}
 						let response = await
-		fetch('https://cors-anywhere.herokuapp.com/https://costoprogramas-back.herokuapp.com/presupuestos/'+
+		fetch('https://cors-anywhere.herokuapp.com/'+CONFIG+'/presupuestos/'+
 			this.state.form.id_programa_presupuesto,config)
 						let json = await response.json()
 						console.log(json);	
@@ -439,7 +439,7 @@ class RegistroCostoPrograma extends Component {
 
 	callProgramaPresupuestoDetalles = () =>{
 		// Uso tipico (no olvides de comparar los props):https://cors-anywhere.herokuapp.com/
-	   axios.get('https://costoprogramas-back.herokuapp.com/presupuestos?idPrograma='
+	   axios.get(CONFIG+'/presupuestos?idPrograma='
 	   		+this.state.form.id_programa+'&idProgramacionPago='+this.state.form.id_programacion_pagos)		
 			.then(response => {
 				let readOnlyHeader = false;
@@ -464,7 +464,7 @@ class RegistroCostoPrograma extends Component {
 	  if (this.state.form.id_programa !== prevState.form.id_programa
 	   || this.state.form.id_programacion_pagos!== prevState.form.id_programacion_pagos ) {
 	  //	console.log(this.state.form.id_programacion_pagos)
-	   axios.get('https://costoprogramas-back.herokuapp.com/presupuestos?idPrograma='
+	   axios.get(CONFIG+'presupuestos?idPrograma='
 	   		+this.state.form.id_programa+'&idProgramacionPago='+this.state.form.id_programacion_pagos)		
 			.then(response => {
 				
@@ -494,21 +494,21 @@ class RegistroCostoPrograma extends Component {
 	}
 
 	componentDidMount(){
-		axios.get('https://costoprogramas-back.herokuapp.com/programas',{ crossdomain: true })
+		axios.get(CONFIG+'/programas',{ crossdomain: true })
 		.then(response => {
 			this.setState({ programas: response.data })			
 		})
 		.catch( error =>{ console.log(error) 
 		});
 
-		axios.get('https://costoprogramas-back.herokuapp.com/programacion-pagos',{ crossdomain: true })
+		axios.get(CONFIG+'/programacion-pagos',{ crossdomain: true })
 		.then(response => {
 			this.setState({ programaciones: response.data })			
 		})
 		.catch( error =>{ console.log(error) 
 		});	
 
-		axios.get('https://costoprogramas-back.herokuapp.com/conceptos',{ crossdomain: true })
+		axios.get(CONFIG+'/conceptos',{ crossdomain: true })
 		.then(response => {
 		    let concepto_all = (response)?response.data:[] ;
 		    concepto_all = Array.from(concepto_all);//convert from nodeList to array
