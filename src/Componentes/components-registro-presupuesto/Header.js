@@ -144,23 +144,28 @@ class Header extends Component {
 	renderBtnEdit_Save(id_programa_presupuesto){
 		if ( Number(id_programa_presupuesto) !== -1) {
 			return 	<div>
-											<button className="btn waves-effect waves-light" onClick={this.focus}
-											 type="button">
+								<button className="btn waves-effect waves-light" onClick={this.focus}
+									type="button">
 												<i className="material-icons">create</i> 
-											</button>
-											&nbsp;
-											<button className="btn waves-effect waves-light" id="save-header"  
-												disabled={this.props.readOnlyCostoCredito}
-
-												>
-												<i className="material-icons">save</i> 
-											</button>
+								</button>
+								&nbsp;
+                <button className="btn btn-sm btn-danger"
+                  onClick={this.props.btnDeleteHeader} type="button"
+                  >
+                  <i className="large material-icons">delete</i>
+                </button>
+								&nbsp;
+								<button className="btn waves-effect waves-light" id="save-header"  
+												disabled={this.props.readOnlyCostoCredito}>
+									<i className="material-icons">save</i> 
+								</button>
 							</div>
 		}
 	}
 	renderCreate(id_programa_presupuesto){
 		if ( Number(id_programa_presupuesto) !== -1) {
-			return 		<Create 
+			return 		
+						<Create 
 									  tipo_grado={this.props.tipo_grado}
 										readOnly={this.props.readOnly}
 										readOnlyBtn={this.props.readOnlyBtn}

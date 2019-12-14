@@ -175,6 +175,7 @@ class LoginForm2 extends React.Component {
       <div className="nav-wrapper azul">
         <ul id="nav-mobile" className="right hide-on-med-and-down">
          {/*  <li><a onClick={this.VistaNueva} >VistaNueva</a></li> */}
+          <li><a onClick={this.vistaPresupuesto} >  <i className="small material-icons right">attach_money</i>Registro Costo Programas</a></li>
           <li><a onClick={this.VistaNueva2} >  <i className="small material-icons right">check_box</i>Asignar Programa</a></li>
           {/*<li><a onClick={this.VistaTablaCreada} ><i className="small material-icons right">pageview</i>Ver tabla</a></li>*/}
         </ul>

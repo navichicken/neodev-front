@@ -175,6 +175,36 @@ class RegistroCostoPrograma extends Component {
 			    }
 			}));
 	}
+/*---------------------------------DELETE HEADER PROGRAMA PRESUPUESTO------------------------------------*/
+	btnDeleteHeader = (e) => {
+		let ciclo_delete =  e.currentTarget.getAttribute('ciclo');
+		let concepto_delete =  Number(e.currentTarget.getAttribute('concepto'));
+		let url ='https://cors-anywhere.herokuapp.com/'+CONFIG+'/presupuestos/'
+										+this.state.form.id_programa_presupuesto;
+			swal({
+			  title: "Estás seguro?",
+			  text: "Una vez hayas eliminado, no podrás recuperar el registro!",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+			    axios.delete(url).then(res => {
+			      	console.log(res);
+			      	window.location.reload(true)				
+							swal("Poof! Tu registro programa presupuesto ha sido eliminado!", {
+								   icon: "success",
+							});       
+			      }).catch(err => {
+			        console.log(err);
+			      });
+  				} else {
+			    swal("Tu registro está seguro!");
+			  }
+			});
+		}
+
 /*---------------------------------DELETE DETALLE PROGRAMA PRESUPUESTO------------------------------------*/
 	btnDeleteDetalle = (e) => {
 
@@ -212,7 +242,7 @@ class RegistroCostoPrograma extends Component {
 		e.preventDefault();
 		let tipo_save = e.currentTarget.getAttribute('tipo_save');
 	
-			switch (Number(tipo_save) ) {
+			switch ( Number(tipo_save) ) {
 			  case 0:
 			/*----------------------- CREAR HEADER PROGRAMA PRESUPUESTO------------------------------- */
 				console.log( 'create Header Programa presupuesto:',this.state.form);
@@ -242,6 +272,7 @@ class RegistroCostoPrograma extends Component {
 					        readOnlyHeader: true,
 					        readOnlyCostoCredito: true      
 					}));
+					this.changeTipoSave(1);
 					swal("Guardado exitoso!", "", "success");
 					}catch( error ){
 						console.log('ERROR..');
@@ -305,7 +336,10 @@ class RegistroCostoPrograma extends Component {
 							console.log('ERROR..',json.error);
 							swal("Oops, Algo salió mal!!", "", "error");
 						}else{
-							this.clearForm();			
+							//this.clearForm();		
+							this.setState({form: {...this.state.form, importe: ''}	});
+							this.setState({form: {...this.state.form, creditos: 0}	});	
+							this.changeTipoSave(1);
 							this.callProgramaPresupuestoDetalles();		
 							swal("Actualización exitosa!", "", "success");
 						}					
@@ -447,7 +481,7 @@ class RegistroCostoPrograma extends Component {
 				this.setState({readOnlyCostoCredito: readOnlyHeader});				
 				this.setState({ programaPresupuesto: response.data })		  	  
 				//console.log('call again programaPresupuesto',response.data)
-				//console.log('call again programaPresupuesto',response.data)
+				console.log('call again programaPresupuesto',response.data)
 				this.setState( {
 					form: {
 						...this.state.form,
@@ -579,7 +613,8 @@ class RegistroCostoPrograma extends Component {
 											readOnlyCostoCredito = {this.state.readOnlyCostoCredito}
 											btnAddCreate = {this.addCreate}
 											tipo_save = {this.state.tipo_save}
-											changeTipoSave = {this.changeTipoSave}											
+											changeTipoSave = {this.changeTipoSave}
+											btnDeleteHeader = {this.btnDeleteHeader}											
 											>						
 						</Header>
 						<div className="card">
@@ -607,7 +642,7 @@ renderSelectedForm( tipo_grado ){
 			return <Detalle 
 			programaDetalle={this.state.programaPresupuesto.programaPresupuestoDetalles}
 			btnEdit = {this.createEditableMatricula}
-			btnDeleteDetalle = {this.btnDeleteDetalle}
+			btnDeleteDetalle = {this.btnDeleteDetalle}			
 			/>
 		}		
 	}
