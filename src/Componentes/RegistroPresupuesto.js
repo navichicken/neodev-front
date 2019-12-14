@@ -21,6 +21,7 @@ class RegistroCostoPrograma extends Component {
 			cuotas: "",
 			importeCalculado: 0,
 			tipo_save: 0,
+			nro_detalles: 0,
 			readOnly: true,
 			readOnlyBtn: true,
 			esDiplomado: false,
@@ -241,6 +242,11 @@ class RegistroCostoPrograma extends Component {
 	handleSubmit = async e =>{
 		e.preventDefault();
 		let tipo_save = e.currentTarget.getAttribute('tipo_save');
+		// this.setState({form: {...this.state.form, costo_total: 0}	} , 
+		// 		function() {
+  //   		console.log(this.state.form.costo_total);
+  // 		}
+  //   );
 	
 			switch ( Number(tipo_save) ) {
 			  case 0:
@@ -319,7 +325,7 @@ class RegistroCostoPrograma extends Component {
 					console.log( 'UPDATE Detalle Programa presupuesto:',this.state.form);
 					try{
 					let config = {
-						method: 'POST',
+						method: 'PUT',
 						headers:{
 							'Accept': 'application/json',
 							'Content-Type': 'application/json'
@@ -477,9 +483,16 @@ class RegistroCostoPrograma extends Component {
 	   axios.get(CONFIG+'/presupuestos?idPrograma='
 	   		+this.state.form.id_programa+'&idProgramacionPago='+this.state.form.id_programacion_pagos)		
 			.then(response => {
-				let readOnlyHeader = false;
+
+				let numeroDetalles = response.data.programaPresupuestoDetalles.length;
+
+				let readOnlyHeader = true;
 				this.setState({readOnlyHeader: readOnlyHeader});
-				this.setState({readOnlyCostoCredito: readOnlyHeader});				
+				this.setState({readOnlyCostoCredito: readOnlyHeader});
+				this.setState({nro_detalles: numeroDetalles
+				}, function() {
+					console.log(numeroDetalles);
+				})				
 				this.setState({ programaPresupuesto: response.data })		  	  
 				//console.log('call again programaPresupuesto',response.data)
 				console.log('call again programaPresupuesto',response.data)
@@ -518,10 +531,14 @@ class RegistroCostoPrograma extends Component {
 							id_programa_presupuesto: response.data.id 
 						}
 					})
+					let numeroDetalles = response.data.programaPresupuestoDetalles.length;
+
 					this.setState( {						
 							...this.state,
-							tipo_save: 1	
+							tipo_save: 1	,
+							nro_detalles: numeroDetalles
 					})	
+					
  					let $bodyHeader = document.getElementById("collapseExample");
 					$bodyHeader.classList.toggle('show');
 			  }	
@@ -568,7 +585,9 @@ class RegistroCostoPrograma extends Component {
     e.preventDefault();    
 	}
 	render(){
-	console.log('tipo save',this.state.tipo_save);
+	//console.log('tipo save',this.state.tipo_save);
+	console.log('nro detalles',this.state.nro_detalles);
+	//console.log('Tipo grado  ', this.state.form.id_programa_presupuesto );
 		const mystyle = {
 			backgroundColor:'black',
 			color:  'lightblue',
@@ -580,7 +599,7 @@ class RegistroCostoPrograma extends Component {
 			fontWeight: 'bold',
 			fontFamily: 'Exo',
 		};
-		console.log('Tipo grado  ', this.state.form.id_programa_presupuesto );
+		
 		return (
 				<div className="app">
 					<h3 style={mystyle}
@@ -619,7 +638,8 @@ class RegistroCostoPrograma extends Component {
 											btnAddCreate = {this.addCreate}
 											tipo_save = {this.state.tipo_save}
 											changeTipoSave = {this.changeTipoSave}
-											btnDeleteHeader = {this.btnDeleteHeader}											
+											btnDeleteHeader = {this.btnDeleteHeader}
+											nro_detalles ={this.state.nro_detalles}											
 											>						
 						</Header>
 						<div className="card">

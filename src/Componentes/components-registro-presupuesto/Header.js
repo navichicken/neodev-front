@@ -122,6 +122,7 @@ class Header extends Component {
 										</div>
 										<div className="col-md-2">
 											{this.renderBtnRPP(this.props.form.id_programa_presupuesto)}
+											{this.renderBtnDelete(this.props.form.id_programa_presupuesto,this.props.nro_detalles)}
 											{this.renderBtnEdit_Save(this.props.form.id_programa_presupuesto)}											
 										</div>									
 									</div>	{/*end.row*/}
@@ -141,6 +142,21 @@ class Header extends Component {
 							</button>
 		}
 	}
+
+	renderBtnDelete(id_programa_presupuesto,nro_detalles){
+		if ( Number(id_programa_presupuesto) !== -1) {
+			if (Number(nro_detalles)<=0) {
+			return <button className="btn btn-sm btn-danger"
+                  onClick={this.props.btnDeleteHeader} type="button"
+                  >
+                  <i className="large material-icons">delete</i>
+              </button>
+		}
+		}
+
+		
+
+	}
 	renderBtnEdit_Save(id_programa_presupuesto){
 		if ( Number(id_programa_presupuesto) !== -1) {
 			return 	<div>
@@ -148,12 +164,6 @@ class Header extends Component {
 									type="button">
 												<i className="material-icons">create</i> 
 								</button>
-								&nbsp;
-                <button className="btn btn-sm btn-danger"
-                  onClick={this.props.btnDeleteHeader} type="button"
-                  >
-                  <i className="large material-icons">delete</i>
-                </button>
 								&nbsp;
 								<button className="btn waves-effect waves-light" id="save-header"  
 												disabled={this.props.readOnlyCostoCredito}>

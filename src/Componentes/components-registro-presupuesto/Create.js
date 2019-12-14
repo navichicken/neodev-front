@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import axios from 'axios';
 import * as Detalles from './detalles';
@@ -121,7 +122,8 @@ class Create extends Component {
 										  // disabled={this.props.isDisabled} 
 										  //disabled={this.props.isDisabled}
 										  readOnly={this.props.readOnlyImporte} 
-										  required/>									    
+										  //required
+										  />									    
 									</div>					  			
 					  		</div>
 					  		<div className="col-md-2">
