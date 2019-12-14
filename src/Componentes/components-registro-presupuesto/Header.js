@@ -111,7 +111,7 @@ class Header extends Component {
 													value={this.props.cuotas} disabled/>						    																																						    			
 											</div>							
 										</div>
-										<div className="col-md-3">
+										<div className="col-md-2">
 											<div className="form-group">
 												 <b> Costo Crédito</b> 									
 												<input type="number" id="costo_credito" className="form-control" placeholder={`Costo crédito`}
@@ -120,10 +120,13 @@ class Header extends Component {
 													disabled={this.props.readOnlyCostoCredito} />	
 											</div>											
 										</div>
-										<div className="col-md-2">
+										<div className="col-md-3">
 											{this.renderBtnRPP(this.props.form.id_programa_presupuesto)}
+											&nbsp;
 											{this.renderBtnDelete(this.props.form.id_programa_presupuesto,this.props.nro_detalles)}
-											{this.renderBtnEdit_Save(this.props.form.id_programa_presupuesto)}											
+											&nbsp;
+											{this.renderBtnEdit_Save(this.props.form.id_programa_presupuesto)}
+											&nbsp;											
 										</div>									
 									</div>	{/*end.row*/}
 								</div>	{/*end.card.body	*/}					
@@ -159,13 +162,13 @@ class Header extends Component {
 	}
 	renderBtnEdit_Save(id_programa_presupuesto){
 		if ( Number(id_programa_presupuesto) !== -1) {
-			return 	<div>
-								<button className="btn waves-effect waves-light" onClick={this.focus}
+			return 	<div className="float-left">
+								<button className="btn waves-effect btn-sm waves-light" onClick={this.focus}
 									type="button">
 												<i className="material-icons">create</i> 
 								</button>
 								&nbsp;
-								<button className="btn waves-effect waves-light" id="save-header"  
+								<button className="btn waves-effect waves-light btn-sm " id="save-header"  
 												disabled={this.props.readOnlyCostoCredito}>
 									<i className="material-icons">save</i> 
 								</button>
