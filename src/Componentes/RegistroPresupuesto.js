@@ -270,9 +270,10 @@ class RegistroCostoPrograma extends Component {
 					this.setState(prevState => ({			                      
 					        ...prevState,    
 					        readOnlyHeader: true,
-					        readOnlyCostoCredito: true      
+					        readOnlyCostoCredito: true,
+					        tipo_save: 1      
 					}));
-					this.changeTipoSave(1);
+				//	this.changeTipoSave(1);
 					swal("Guardado exitoso!", "", "success");
 					}catch( error ){
 						console.log('ERROR..');
@@ -516,6 +517,10 @@ class RegistroCostoPrograma extends Component {
 							costo_credito: response.data.costoCredito,
 							id_programa_presupuesto: response.data.id 
 						}
+					})
+					this.setState( {						
+							...this.state,
+							tipo_save: 1	
 					})	
  					let $bodyHeader = document.getElementById("collapseExample");
 					$bodyHeader.classList.toggle('show');
@@ -563,7 +568,7 @@ class RegistroCostoPrograma extends Component {
     e.preventDefault();    
 	}
 	render(){
-	//console.log('tipo save',this.state.tipo_save);
+	console.log('tipo save',this.state.tipo_save);
 		const mystyle = {
 			backgroundColor:'black',
 			color:  'lightblue',
@@ -575,7 +580,7 @@ class RegistroCostoPrograma extends Component {
 			fontWeight: 'bold',
 			fontFamily: 'Exo',
 		};
-		//console.log('Tipo grado  ', this.state.form.creditos );
+		console.log('Tipo grado  ', this.state.form.id_programa_presupuesto );
 		return (
 				<div className="app">
 					<h3 style={mystyle}
