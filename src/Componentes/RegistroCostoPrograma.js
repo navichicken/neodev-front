@@ -586,7 +586,7 @@ class RegistroCostoPrograma extends Component {
 	}
 	render(){
 	//console.log('tipo save',this.state.tipo_save);
-	console.log('nro detalles',this.state.nro_detalles);
+	//console.log('nro detalles',this.state.nro_detalles);
 	//console.log('Tipo grado  ', this.state.form.id_programa_presupuesto );
 		const mystyle = {
 			backgroundColor:'black',

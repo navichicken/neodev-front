@@ -14,7 +14,7 @@ import VistaIntermedia from './Componentes/seleccion-intermedia';
 import ComponenteEditable from './Componentes/ComponenteEditable';
 import Formulario from './Componentes/formulario';
 import VistaSeguimientoEgresado from './Componentes/VistaSeguimientoEgresado';
-import RegistroPresupuesto from './Componentes/RegistroPresupuesto';
+import RegistroCostoPrograma from './Componentes/RegistroCostoPrograma';
 
 
 class Index extends React.Component {
@@ -33,9 +33,11 @@ class Index extends React.Component {
             <Route path="/vista/tabla" component={ VistaTablaNuevo}></Route>
             <Route path="/vista/loginNyA" component={LoginFormNombreApellidos}></Route>
             <Route path="/vista/imprimir" component={ComponenteEditable}></Route>
-            <Route path="/vista/presupuestoRegistro" component={RegistroPresupuesto}></Route>
             <Route path="/formulario/:codigo" component={Formulario}></Route>          
             <Route path="/:name/vista/egresado" component={VistaSeguimientoEgresado}></Route>
+                        {/*  Routa a vista de registro Programa*/}
+            <Route path="/vista/registroPrograma" component={RegistroCostoPrograma}></Route>
+
             
           </Router>
           )

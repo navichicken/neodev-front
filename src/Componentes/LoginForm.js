@@ -19,6 +19,12 @@ class LoginForm extends React.Component {
   }
 
 
+  vistaRegistroProgramas = (e) =>{
+    browserHistory.push('/vista/registroPrograma');
+    e.preventDefault();
+  }
+
+
   onSubmit=(e)=>{
     
     // console.log(this.state.nombres);
@@ -50,44 +56,31 @@ class LoginForm extends React.Component {
             .then((pagos) => {
             // console.log("pagos recibidos");
             // console.log(pagos);
-             if(pagos.length>0){
-
-                
+             if(pagos.length>0){                
               swal("Consulta realizada exitosamente!" ,"", "success").then(
                  browserHistory.push('/'+this.state.nombres.toUpperCase()))
               }
               else{
                 swal("No se encontraron pagos con el nombre ingresado", "", "info");
               }
-
             })
             .catch(error => {
-
                 swal("Oops, Algo salió mal!", "","error")
                 console.error(error)
             });
     }
-    e.preventDefault();
-    
+    e.preventDefault();    
   }
-  VistaNueva=(e)=>{
-    
+  VistaNueva=(e)=>{    
     browserHistory.push('/vista/nueva');
     // console.log("Vista nueva");
-    e.preventDefault();
-    
-  }
-  NuevoLogin=(e)=>{
-    
-    browserHistory.push('/vista/loginNyA');
-    // console.log("Vista nueva");
-    e.preventDefault();
-    
+    e.preventDefault();    
   }
 
-  vistaPresupuesto = (e) =>{
-    browserHistory.push('/vista/presupuestoRegistro');
-    e.preventDefault();
+  NuevoLogin=(e)=>{    
+    browserHistory.push('/vista/loginNyA');
+    // console.log("Vista nueva");
+    e.preventDefault();    
   }
 
 
@@ -130,7 +123,7 @@ class LoginForm extends React.Component {
     <div className="nav-wrapper azul">
       <ul id="nav-mobile" className="right hide-on-med-and-down">
        {/*  <li><a onClick={this.VistaNueva} >VistaNueva</a></li> */}
-        <li><a onClick={this.vistaPresupuesto} >  <i className="small material-icons right">attach_money</i>Registro Costo Programas</a></li>
+        <li><a onClick={this.vistaRegistroProgramas} >  <i className="small material-icons right">attach_money</i>Registro Costo Programas</a></li>
         <li><a onClick={this.VistaNueva2} >  <i className="small material-icons right">check_box</i>Asignar Programa</a></li>
         {/*<li><a onClick={this.VistaTablaCreada} ><i className="small material-icons right">pageview</i>Ver tabla</a></li>*/}
       </ul>
